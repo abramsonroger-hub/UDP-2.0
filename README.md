@@ -1,7 +1,12 @@
 # UDP-2.0
 Lean, secure-ready transport protocol
 
-See DISCLAIMERS.md for the enforcement notice.
+## Developer's Note
+WELCOME! So glad you came. You've made it here, and in exchange, what you're about to see is something we're incredibly delighted and honored to present to you. Thank you for coming.
+
+Do see DISCLAIMERS.md for our important enforcement notice. You'll be glad you did.
+
+Imagine a faster, more reliable experience. Blazing fast internet with a snappy user experiences across the web. Blazing fast, low-latency gaming. And that's only the beginning.
 
 # UDP 2.0: a lean, secure-ready transport
 
