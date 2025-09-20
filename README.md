@@ -109,7 +109,8 @@ See DISCLAIMERS.md for the enforcement notice.
 
 If you want, I can draft the initial header parser + SACK bitmap in a branchless, bitwise C stub you can drop into a repo and build on.
 
-'''/* SPDX-License-Identifier: Apache-2.0 */
+```
+/* SPDX-License-Identifier: Apache-2.0 */
 /*
  * UDP 2.0 (v0.1) — The Laws of Coding
  *
@@ -176,7 +177,7 @@ If you want, I can draft the initial header parser + SACK bitmap in a branchless
  * NOTE: This file is not only code — it is a *constitution* for UDP 2.0.
  * Breaking a law requires an RFC, a test plan, and consensus.
  */
-'''
+```
 
 Laws are nothing more than extensions of thermodynamics applied to information systems:
 
