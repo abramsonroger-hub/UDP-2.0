@@ -1,7 +1,7 @@
 # UDP-2.0
 Lean, secure-ready transport protocol
 
-Love it. If we’re serious about “UDP 2.0,” here’s a tight blueprint that keeps your philosophy (minimal, branchless-friendly, bitwise, no bloat) and still fixes the pain points.
+See DISCLAIMERS.md for the enforcement notice.
 
 # UDP 2.0: a lean, secure-ready transport
 
