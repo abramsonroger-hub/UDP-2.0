@@ -108,3 +108,86 @@ Love it. If we’re serious about “UDP 2.0,” here’s a tight blueprint that
 **Tagline**: *“UDP 2.0 — reliability when you want it, speed when you need it, security when you ask for it. All without the bloat.”*
 
 If you want, I can draft the initial header parser + SACK bitmap in a branchless, bitwise C stub you can drop into a repo and build on.
+
+'''/* SPDX-License-Identifier: Apache-2.0 */
+/*
+ * UDP 2.0 (v0.1) — The Laws of Coding
+ *
+ * This file is the reference implementation of UDP 2.0, a transport layer
+ * protocol built for modern reliability, security, and evolvability.
+ *
+ * The original UDP (RFC 768, 1980) was defined in 3 pages. Its elegance
+ * endured, but its omissions (no handshake, no reliability, no framing
+ * security) forced a maze of ad-hoc fixes. UDP 2.0 codifies new *laws* to
+ * prevent that brittleness from returning.
+ *
+ * 0) LAW OF STATED INVARIANTS
+ *    Every API function specifies:
+ *      - Ownership of buffers (send/recv)
+ *      - Lifetime of socket state (open/close/retry semantics)
+ *      - Error handling (drop, retry, fail)
+ *
+ * 1) LAW OF SINGLE-POINT TRUTH
+ *    Header layout (fields, endianness, reserved bits) lives in one struct.
+ *    All accessors/macros derive from it. No duplicate definitions.
+ *
+ * 2) LAW OF LOUD FAILURE
+ *    Packet validation (length, checksum, version, extensions) must fail
+ *    loudly and deterministically. Silent discard = telemetry with reason code.
+ *
+ * 3) LAW OF EXPLICIT FALLBACK
+ *    Fallback to UDPv1 is policy, not accident. It is:
+ *      - Documented here
+ *      - Version-negotiated on wire
+ *      - Metrics-observable
+ *
+ * 4) LAW OF MINIMAL SURFACE
+ *    Export only the functions that can be defended by invariants:
+ *      - udp2_socket_open/close
+ *      - udp2_sendmsg/recvmsg
+ *      - udp2_setsockopt (restricted set)
+ *
+ * 5) LAW OF BACK-COMPAT BY CONTRACT
+ *    Compatibility promises are text here + conformance tests. Legacy quirks
+ *    are not implied unless written.
+ *
+ * 6) LAW OF FAILURE AS DATA
+ *    Every dropped packet is reason-coded:
+ *      - BAD_CHECKSUM
+ *      - UNSUPPORTED_VERSION
+ *      - EXTENSION_REQUIRED
+ *    Failures are ratelimited and exported via tracepoint.
+ *
+ * 7) LAW OF PARITY TESTS
+ *    Each path (IPv4/IPv6, hardware offload, software fallback) has a parity
+ *    test proving identical postconditions (data delivered or error code).
+ *
+ * 8) LAW OF OPTIONAL OPTIMIZATION
+ *    Performance features (zero-copy, batching, GRO) are optional. Protocol
+ *    correctness never depends on them.
+ *
+ * Maintainer Checklist:
+ *  [ ] Header struct unchanged or migration note added
+ *  [ ] Invariants paragraph updated for new/changed API
+ *  [ ] Failure codes unchanged or extended with doc + test
+ *  [ ] Fallback policy unchanged or metrics key added
+ *  [ ] Tests: parity, version-negotiation, checksum failure, max-MTU
+ *
+ * NOTE: This file is not only code — it is a *constitution* for UDP 2.0.
+ * Breaking a law requires an RFC, a test plan, and consensus.
+ */
+'''
+
+Laws are nothing more than extensions of thermodynamics applied to information systems:
+
+Conservation → no duplicated truth, no lost invariants.
+
+Entropy → every error, every dropped packet carries information (failure-as-data).
+
+Second law → if unchecked, systems drift into disorder, so the laws inject corrective forces (loud failure, explicit fallback).
+
+Reversibility / irreversibility → once a packet is dropped or logged, it’s a permanent state transition (ratelimited trace, not silence).
+
+Optional optimization → like physical systems, you can add efficiency (heat exchangers, batching), but never by violating conservation.
+
+
