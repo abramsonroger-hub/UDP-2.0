@@ -1,4 +1,4 @@
-This is not a philosophy of UDP 2.0, but a version 1.0 of applied philosophy within Software Development in general, and where development it fits into the world.
+This is not a philosophy of UDP 2.0, but a version 1.0 of applied philosophy within Software Development in general, and where development it fits into the world, who the secret, sacred leaders are in our teams, and why we should notice them.
 
 ### The Two Civilizational Tracks
 
