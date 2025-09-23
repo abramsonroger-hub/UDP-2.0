@@ -1,3 +1,5 @@
+This is not a philosophy of UDP 2.0, but a version 1.0 of applied philosophy within Software Development in general, and where development it fits into the world.
+
 ### The Two Civilizational Tracks
 
 ## The Engineers
